@@ -9,7 +9,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class BasicAuthInterceptor implements Interceptor {
+class BasicAuthInterceptor implements Interceptor {
     private String AUTH_UM = "";
     private String AUTH_PW = "";
     public BasicAuthInterceptor(String AUTH_UM, String AUTH_PW) {

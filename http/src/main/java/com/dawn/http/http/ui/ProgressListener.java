@@ -1,6 +1,6 @@
 package com.dawn.http.http.ui;
 
-public abstract class ProgressListener implements ProgressCallback {
+abstract class ProgressListener implements ProgressCallback {
     boolean started;
     long lastRefreshTime = 0L;
     long lastBytesWritten = 0L;

@@ -10,7 +10,7 @@ import okhttp3.Response;
 /**
  * @ClassName: HttpResponseHandler
  */
-public abstract class HttpResponseHandler implements Callback {
+abstract class HttpResponseHandler implements Callback {
     public HttpResponseHandler() {
     }
 

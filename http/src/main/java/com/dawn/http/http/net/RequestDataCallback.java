@@ -3,7 +3,7 @@ package com.dawn.http.http.net;
 /**
  * @ClassName: RequestDataCallback
  */
-abstract class RequestDataCallback<T> {
+public abstract class RequestDataCallback<T> {
     //返回json对象
     public void dataCallback(T obj) {
     }

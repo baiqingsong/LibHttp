@@ -46,8 +46,8 @@ public class HTTPCaller {
     private Map<String, Call> requestHandleMap = null;//以URL为KEY存储的请求
     private CacheControl cacheControl = null;//缓存控制器
     private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private String AUTH_UM = "";
-    private String AUTH_PW = "";
+//    private String AUTH_UM = "";
+//    private String AUTH_PW = "";
 
     private Gson gson = null;
 
@@ -75,10 +75,10 @@ public class HTTPCaller {
                 .connectTimeout(httpConfig.getConnectTimeout(), TimeUnit.SECONDS)
                 .writeTimeout(httpConfig.getWriteTimeout(), TimeUnit.SECONDS)
                 .readTimeout(httpConfig.getReadTimeout(), TimeUnit.SECONDS)
-                .addInterceptor(new BasicAuthInterceptor(httpConfig.getAUTH_UM(), httpConfig.getAUTH_PW()))
+//                .addInterceptor(new BasicAuthInterceptor(httpConfig.getAUTH_UM(), httpConfig.getAUTH_PW()))
                 .build();
-        AUTH_UM = TextUtils.isEmpty(httpConfig.getAUTH_UM()) ? "" : httpConfig.getAUTH_UM();
-        AUTH_PW = TextUtils.isEmpty(httpConfig.getAUTH_PW()) ? "" : httpConfig.getAUTH_PW();
+//        AUTH_UM = TextUtils.isEmpty(httpConfig.getAUTH_UM()) ? "" : httpConfig.getAUTH_UM();
+//        AUTH_PW = TextUtils.isEmpty(httpConfig.getAUTH_PW()) ? "" : httpConfig.getAUTH_PW();
         gson = new Gson();
         requestHandleMap = Collections.synchronizedMap(new WeakHashMap<String, Call>());
         cacheControl = new CacheControl.Builder().noStore().noCache().build();//不使用缓存
@@ -480,8 +480,8 @@ public class HTTPCaller {
         if (header == null) {
             builder.header("Connection", "close");
             builder.header("Accept", "*/*");
-            builder.header("Username", AUTH_UM);
-            builder.header("Password", AUTH_PW);
+//            builder.header("Username", AUTH_UM);
+//            builder.header("Password", AUTH_PW);
         } else {
             for (Header h : header) {
                 builder.header(h.getName(), h.getValue());

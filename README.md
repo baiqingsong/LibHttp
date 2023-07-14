@@ -20,3 +20,6 @@ Http配置类
     httpConfig.addCommonField("pf", "android");
     httpConfig.addCommonField("version_code", String.valueOf(SystemUtil.getVersionCode(getApplicationContext())));
 ```
+
+
+1.0.9版本后去掉头部参数统一配置，需要每个接口单独配置

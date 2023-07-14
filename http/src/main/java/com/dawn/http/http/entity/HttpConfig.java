@@ -15,8 +15,8 @@ public class HttpConfig {
     private int writeTimeout = 10;//写入超时时间 单位:秒
     private int readTimeout = 30;//读取超时时间 单位:秒
 
-    private String AUTH_UM;
-    private String AUTH_PW;
+//    private String AUTH_UM;
+//    private String AUTH_PW;
 
     //通用字段
     private List<NameValuePair> commonField = new ArrayList<>();
@@ -81,21 +81,21 @@ public class HttpConfig {
         this.readTimeout = readTimeout;
     }
 
-    public String getAUTH_UM() {
-        return AUTH_UM;
-    }
-
-    public void setAUTH_UM(String AUTH_UM) {
-        this.AUTH_UM = AUTH_UM;
-    }
-
-    public String getAUTH_PW() {
-        return AUTH_PW;
-    }
-
-    public void setAUTH_PW(String AUTH_PW) {
-        this.AUTH_PW = AUTH_PW;
-    }
+//    public String getAUTH_UM() {
+//        return AUTH_UM;
+//    }
+//
+//    public void setAUTH_UM(String AUTH_UM) {
+//        this.AUTH_UM = AUTH_UM;
+//    }
+//
+//    public String getAUTH_PW() {
+//        return AUTH_PW;
+//    }
+//
+//    public void setAUTH_PW(String AUTH_PW) {
+//        this.AUTH_PW = AUTH_PW;
+//    }
 
     /**
      * 更新参数

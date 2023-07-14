@@ -178,11 +178,11 @@ public class HTTPCaller {
         add(url, postBuilder(url, header, params, new MyHttpResponseHandler(clazz, url, callback)), autoCancel);
     }
 
-    public <T> void post(final Class<T> clazz, final String url, Header[] header, final String params, final RequestDataCallback<T> callback, boolean autoCancel) {
+    public <T> void post(final Class<T> clazz, final String url, Header[] header, final String params, final RequestDataCallback<T> callback) {
         if (checkAgent()) {
             return;
         }
-        add(url, postBuilder(url, header, params, new MyHttpResponseHandler(clazz, url, callback)), autoCancel);
+        add(url, postBuilder(url, header, params, new MyHttpResponseHandler(clazz, url, callback)), true);
     }
 
     public <T> T postSync(Class<T> clazz, String url, List<NameValuePair> form) {

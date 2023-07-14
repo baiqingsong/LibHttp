@@ -178,6 +178,13 @@ public class HTTPCaller {
         add(url, postBuilder(url, header, params, new MyHttpResponseHandler(clazz, url, callback)), autoCancel);
     }
 
+    public <T> void post(final Class<T> clazz, final String url, Header[] header, final String params, final RequestDataCallback<T> callback, boolean autoCancel) {
+        if (checkAgent()) {
+            return;
+        }
+        add(url, postBuilder(url, header, params, new MyHttpResponseHandler(clazz, url, callback)), autoCancel);
+    }
+
     public <T> T postSync(Class<T> clazz, String url, List<NameValuePair> form) {
         return postSync(clazz, url, form, null);
     }
@@ -235,6 +242,17 @@ public class HTTPCaller {
         return null;
     }
 
+    private Call postBuilder(String url, Header[] header, String json, HttpResponseHandler responseCallback) {
+        try {
+            Request.Builder builder = getRequestBuild(url, json);
+            return execute(builder, header, responseCallback);
+        } catch (Exception e) {
+            if (responseCallback != null)
+                responseCallback.onFailure(-1, e.getMessage().getBytes());
+        }
+        return null;
+    }
+
     private Request.Builder getRequestBuild(String url, List<NameValuePair> form) {
         if (form == null) {
             form = new ArrayList<>();
@@ -263,6 +281,18 @@ public class HTTPCaller {
         printLog("requestBody json: " + gson.toJson(form));
         RequestBody requestBody = RequestBody.create(JSON, gson.toJson(form));
 
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        builder.post(requestBody);
+        return builder;
+    }
+
+    private Request.Builder getRequestBuild(String url, String json){
+        if(TextUtils.isEmpty(json)){
+            json = "{}";
+        }
+        printLog("requestBody json: " + json);
+        RequestBody requestBody = RequestBody.create(JSON, json);
         Request.Builder builder = new Request.Builder();
         builder.url(url);
         builder.post(requestBody);

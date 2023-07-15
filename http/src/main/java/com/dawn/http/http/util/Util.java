@@ -8,6 +8,8 @@ import com.dawn.http.http.net.NameValuePair;
 import java.net.URLEncoder;
 import java.util.List;
 
+import okhttp3.Credentials;
+
 public class Util {
     /**
      * 获取文件名称
@@ -65,5 +67,9 @@ public class Util {
 
         }
         return sb.toString();
+    }
+
+    public static String getAuthorization(String AUTH_UM, String AUTH_PW) {
+        return Credentials.basic(AUTH_UM, AUTH_PW);
     }
 }

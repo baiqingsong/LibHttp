@@ -10,8 +10,8 @@ android {
         applicationId "com.dawn.libhttp"
         minSdk 21
         targetSdk 28
-        versionCode 21
-        versionName "1.2.1"
+        versionCode 22
+        versionName "1.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk{

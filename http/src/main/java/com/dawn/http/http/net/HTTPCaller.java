@@ -4,13 +4,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.dawn.http.http.entity.HttpConfig;
 import com.dawn.http.http.ui.ProgressHelper;
 import com.dawn.http.http.ui.ProgressUIListener;
 import com.dawn.http.http.util.Util;
 import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,8 +43,6 @@ public class HTTPCaller {
     private Map<String, Call> requestHandleMap = null;//以URL为KEY存储的请求
     private CacheControl cacheControl = null;//缓存控制器
     private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//    private String AUTH_UM = "";
-//    private String AUTH_PW = "";
 
     private Gson gson = null;
 
@@ -75,10 +70,7 @@ public class HTTPCaller {
                 .connectTimeout(httpConfig.getConnectTimeout(), TimeUnit.SECONDS)
                 .writeTimeout(httpConfig.getWriteTimeout(), TimeUnit.SECONDS)
                 .readTimeout(httpConfig.getReadTimeout(), TimeUnit.SECONDS)
-//                .addInterceptor(new BasicAuthInterceptor(httpConfig.getAUTH_UM(), httpConfig.getAUTH_PW()))
                 .build();
-//        AUTH_UM = TextUtils.isEmpty(httpConfig.getAUTH_UM()) ? "" : httpConfig.getAUTH_UM();
-//        AUTH_PW = TextUtils.isEmpty(httpConfig.getAUTH_PW()) ? "" : httpConfig.getAUTH_PW();
         gson = new Gson();
         requestHandleMap = Collections.synchronizedMap(new WeakHashMap<String, Call>());
         cacheControl = new CacheControl.Builder().noStore().noCache().build();//不使用缓存

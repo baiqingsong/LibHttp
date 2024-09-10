@@ -46,8 +46,5 @@ abstract class HttpResponseHandler implements Callback {
     public void onFailure(int status, byte[] data) {
     }
 
-//	public void onProgress(int bytesWritten, int totalSize) {
-//	}
-
     public abstract void onSuccess(int statusCode, Header[] headers, byte[] responseBody);
 }

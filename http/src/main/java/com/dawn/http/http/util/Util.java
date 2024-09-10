@@ -1,13 +1,9 @@
 package com.dawn.http.http.util;
 
 import android.text.TextUtils;
-
-
 import com.dawn.http.http.net.NameValuePair;
-
 import java.net.URLEncoder;
 import java.util.List;
-
 import okhttp3.Credentials;
 
 public class Util {

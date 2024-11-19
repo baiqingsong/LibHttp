@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getMachineMsg(View view){
-        getMsg();
+        post_ceshi();
     }
 
     private void initHttp(){
@@ -43,14 +43,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getMsg(){
+        Log.e("dawn", "getMsg: ");
         String url = "http://jargee.cn/photomachines/photomachines/EA5C80FD363900000000";
         Map<String, String> headersMap = new HashMap<>();
         headersMap.put("Authorization", Util.getAuthorization("", ""));
-        HttpUtil.getInstance().get(MachineMsgBean.class, url, new RequestDataCallback<MachineMsgBean>() {
+        HttpUtil.getInstance().get(MachineMsgBean.class, url, headersMap, new RequestDataCallback<MachineMsgBean>() {
             @Override
             public void dataCallback(MachineMsgBean obj) {
                 Log.e("dawn", "dataCallback: " + (obj == null ? "null" : obj.toString() ));
             }
         });
+    }
+
+    private void get_ceshi(){
+        String url = "http://tt.jargee.cn/basic/cm/banner/EA5C80FD363900000000";
+        HttpUtil.getInstance().get(Object.class, url, new RequestDataCallback<Object>() {
+            @Override
+            public void dataCallback(Object obj) {
+                super.dataCallback(obj);
+            }
+        });
+    }
+
+    private void post_ceshi(){
+        String url = "http://tt.jargee.cn/basic/factory/device/detection/data?sn=EA5C80FD363900000000";
+        Map<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("self_test_num", "2");
+        HttpUtil.getInstance().post(Object.class, url, paramsMap, new RequestDataCallback<Object>() {
+            @Override
+            public void dataCallback(Object obj) {
+                super.dataCallback(obj);
+            }
+        });
+
     }
 }

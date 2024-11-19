@@ -23,3 +23,31 @@ Http配置类
 
 
 1.1.1版本后去掉头部参数统一配置，需要每个接口单独配置
+
+如果header中需要传单独的参数
+```
+    Map<String, String> headersMap = new HashMap<>();
+    headersMap.put("Authorization", Util.getAuthorization("", ""));
+```
+
+get请求
+```agsl
+    HttpUtil.getInstance().get(Object.class, url, new RequestDataCallback<Object>() {
+        @Override
+        public void dataCallback(Object obj) {
+            super.dataCallback(obj);
+        }
+    });
+```
+
+post 请求
+```agsl
+    Map<String, String> paramsMap = new HashMap<>();
+    paramsMap.put("self_test_num", "2");
+    HttpUtil.getInstance().post(Object.class, url, paramsMap, new RequestDataCallback<Object>() {
+        @Override
+        public void dataCallback(Object obj) {
+            super.dataCallback(obj);
+        }
+    });
+```

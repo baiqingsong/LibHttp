@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initHttp();
+        post_ceshi();
     }
 
     public void getMachineMsg(View view){
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         //可以添加一些公共字段 每个接口都会带上
         httpConfig.addCommonField("pf", "android");
         httpConfig.addCommonField("version_code", "1.0.1");
+        httpConfig.addHeaderField("version", "7");
 
         HTTPCaller.getInstance().setHttpConfig(httpConfig);
     }
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void get_ceshi(){
-        String url = "http://tt.jargee.cn/basic/cm/banner/EA5C80FD363900000000";
+        String url = "http://tt.jargee.cn/basic/cm/banner/E24FC559653600000000";
         HttpUtil.getInstance().get(Object.class, url, new RequestDataCallback<Object>() {
             @Override
             public void dataCallback(Object obj) {
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void post_ceshi(){
-        String url = "http://tt.jargee.cn/basic/factory/device/detection/data?sn=EA5C80FD363900000000";
+        String url = "http://tt.jargee.cn/basic/factory/device/detection/data?sn=E24FC559653600000000";
         Map<String, String> paramsMap = new HashMap<>();
         paramsMap.put("self_test_num", "2");
         HttpUtil.getInstance().post(Object.class, url, paramsMap, new RequestDataCallback<Object>() {
@@ -77,4 +79,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

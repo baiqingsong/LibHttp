@@ -107,7 +107,30 @@ public class HTTPCaller {
         Request.Builder builder = new Request.Builder();
         builder.url(url);
         builder.get();
-        return execute(builder, header, responseCallback);
+
+        return execute(builder, getCommonHeader(header), responseCallback);
+    }
+
+    private Header[] getCommonHeader(Header[] headerOld){
+        // 获取 HttpConfig 的公共字段
+        List<NameValuePair> headerFields = httpConfig.getHeaderField();
+
+        // 如果公共字段为空，返回空的 Header 数组
+        if (headerFields == null || headerFields.isEmpty()) {
+            return headerOld;
+        }
+        if(headerOld == null)
+            headerOld = new Header[0];
+        // 创建 Header 数组
+        Header[] headerNew = new Header[headerOld.length + headerFields.size()];
+
+        // 遍历公共字段，将每个键值对转换为 Header 对象
+        for (int i = 0; i < headerFields.size(); i++) {
+            NameValuePair field = headerFields.get(i);
+            headerNew[headerOld.length + i] = new Header(field.getName(), field.getValue());
+        }
+
+        return headerNew;
     }
 
     public <T> T getSync(Class<T> clazz, String url) {
@@ -215,7 +238,7 @@ public class HTTPCaller {
     private Call postBuilder(String url, Header[] header, List<NameValuePair> form, HttpResponseHandler responseCallback) {
         try {
             Request.Builder builder = getRequestBuild(url, form);
-            return execute(builder, header, responseCallback);
+            return execute(builder, getCommonHeader(header), responseCallback);
         } catch (Exception e) {
             if (responseCallback != null)
                 responseCallback.onFailure(-1, e.getMessage().getBytes());
@@ -226,7 +249,7 @@ public class HTTPCaller {
     private Call postBuilder(String url, Header[] header, Map form, HttpResponseHandler responseCallback) {
         try {
             Request.Builder builder = getRequestBuild(url, form);
-            return execute(builder, header, responseCallback);
+            return execute(builder, getCommonHeader(header), responseCallback);
         } catch (Exception e) {
             if (responseCallback != null)
                 responseCallback.onFailure(-1, e.getMessage().getBytes());
@@ -237,7 +260,7 @@ public class HTTPCaller {
     private Call postBuilder(String url, Header[] header, String json, HttpResponseHandler responseCallback) {
         try {
             Request.Builder builder = getRequestBuild(url, json);
-            return execute(builder, header, responseCallback);
+            return execute(builder, getCommonHeader(header), responseCallback);
         } catch (Exception e) {
             if (responseCallback != null)
                 responseCallback.onFailure(-1, e.getMessage().getBytes());
@@ -476,6 +499,7 @@ public class HTTPCaller {
 //            builder.header("Password", AUTH_PW);
         } else {
             for (Header h : header) {
+                Log.i("dawn", "header:" + h.getName() + " value:" + h.getValue());
                 builder.header(h.getName(), h.getValue());
                 if (!hasUa && h.getName().equals("User-Agent")) {
                     hasUa = true;

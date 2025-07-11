@@ -17,6 +17,7 @@ public class HttpConfig {
 
     //通用字段
     private List<NameValuePair> commonField = new ArrayList<>();
+    private List<NameValuePair> headerField = new ArrayList<>();//请求头字段
 
     public boolean isDebug() {
         return debug;
@@ -52,6 +53,10 @@ public class HttpConfig {
 
     public List<NameValuePair> getCommonField() {
         return commonField;
+    }
+
+    public List<NameValuePair> getHeaderField() {
+        return headerField;
     }
 
     public int getConnectTimeout() {
@@ -120,5 +125,14 @@ public class HttpConfig {
      */
     public void addCommonField(String key, String value) {
         commonField.add(new NameValuePair(key, value));
+    }
+
+    /**
+     * 添加请求头字段
+     * @param key
+     * @param value
+     */
+    public void addHeaderField(String key, String value) {
+        headerField.add(new NameValuePair(key, value));
     }
 }

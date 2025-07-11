@@ -119,17 +119,24 @@ public class HTTPCaller {
         if (headerFields == null || headerFields.isEmpty()) {
             return headerOld;
         }
-        if(headerOld == null)
-            headerOld = new Header[0];
         // 创建 Header 数组
-        Header[] headerNew = new Header[headerOld.length + headerFields.size()];
+        Header[] headerNew;
+        if(headerOld == null) {
+            headerOld = new Header[0];
+            headerNew = new Header[headerFields.size()];
+        }else{
+            headerNew = new Header[headerOld.length + headerFields.size()];
+            for(int i = 0; i < headerOld.length; i++) {
+                headerNew[i] = headerOld[i];
+            }
+        }
 
         // 遍历公共字段，将每个键值对转换为 Header 对象
         for (int i = 0; i < headerFields.size(); i++) {
             NameValuePair field = headerFields.get(i);
+            Log.i("dawn", "公共字段 key:" + field.getName() + " value:" + field.getValue());
             headerNew[headerOld.length + i] = new Header(field.getName(), field.getValue());
         }
-
         return headerNew;
     }
 

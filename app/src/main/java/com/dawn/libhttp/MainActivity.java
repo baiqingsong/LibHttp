@@ -59,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void get_ceshi(){
         String url = "http://tt.jargee.cn/basic/cm/banner/E24FC559653600000000";
-        HttpUtil.getInstance().get(Object.class, url, new RequestDataCallback<Object>() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("ce", "s");
+        HttpUtil.getInstance().get(Object.class, url, headers, new RequestDataCallback<Object>() {
             @Override
             public void dataCallback(Object obj) {
                 super.dataCallback(obj);
@@ -71,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://tt.jargee.cn/basic/factory/device/detection/data?sn=E24FC559653600000000";
         Map<String, String> paramsMap = new HashMap<>();
         paramsMap.put("self_test_num", "2");
-        HttpUtil.getInstance().post(Object.class, url, paramsMap, new RequestDataCallback<Object>() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("ce", "s");
+        HttpUtil.getInstance().post(Object.class, url, headers, paramsMap, new RequestDataCallback<Object>() {
             @Override
             public void dataCallback(Object obj) {
                 super.dataCallback(obj);

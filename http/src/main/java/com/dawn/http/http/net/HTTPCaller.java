@@ -134,7 +134,7 @@ public class HTTPCaller {
         // 遍历公共字段，将每个键值对转换为 Header 对象
         for (int i = 0; i < headerFields.size(); i++) {
             NameValuePair field = headerFields.get(i);
-            Log.i("dawn", "公共字段 key:" + field.getName() + " value:" + field.getValue());
+//            Log.i("dawn", "公共字段 key:" + field.getName() + " value:" + field.getValue());
             headerNew[headerOld.length + i] = new Header(field.getName(), field.getValue());
         }
         return headerNew;
